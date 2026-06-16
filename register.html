@@ -144,8 +144,28 @@
           <span>I consent to MCCSC storing these details to respond to my request. I understand my information is handled confidentially. <span class="todo">Link Privacy Policy before launch.</span></span>
         </label>
 
+        <div class="photo-capture" data-photo-capture>
+          <div class="pc-head">
+            <h4>Add a photo <span class="pc-opt">— optional</span></h4>
+            <button type="button" class="pc-mini" data-pc-enable>Enable camera</button>
+          </div>
+          <p class="pc-why">Some services ask for a photo for identification at appointments. This is entirely optional — you can skip it and still register. Your camera only turns on if you choose to enable it, and the photo is sent only when you submit.</p>
+          <div class="pc-stage" data-pc-stage>
+            <video class="pc-video" data-pc-video autoplay playsinline muted></video>
+            <img class="pc-shot" data-pc-shot alt="Captured photo preview">
+            <div class="pc-btns">
+              <button type="button" class="pc-mini primary" data-pc-capture>Capture photo</button>
+              <button type="button" class="pc-mini" data-pc-retake style="display:none">Retake</button>
+              <button type="button" class="pc-mini" data-pc-remove style="display:none">Remove photo</button>
+              <button type="button" class="pc-mini" data-pc-cancel>Turn off camera</button>
+            </div>
+            <p class="pc-status" data-pc-status></p>
+          </div>
+          <input type="hidden" name="photo" data-pc-data>
+        </div>
+
         <div class="it-note">
-          <strong>For the portal developer:</strong> this is a static front end. Set the endpoint and field mapping in <code>assets/register.js</code> (CONFIG block at top). CSRF token, server-side validation, and any webcam photo capture are to be handled by the backend — not implemented here.
+          <strong>For the portal developer:</strong> this is a static front end. Set the endpoint and field mapping in <code>assets/register.js</code> (CONFIG block at top). The optional webcam photo is sent as a base64 data URL in the <code>photo</code> field (empty if the user skips). CSRF token and server-side validation/storage are to be handled by the backend — not implemented here.
         </div>
       </div>
 

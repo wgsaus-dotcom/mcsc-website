@@ -338,3 +338,21 @@ section{padding:clamp(3.5rem,7vw,6rem) 0}
 .it-note{grid-column:1 / -1;background:rgba(224,169,63,.12);border:1px dashed var(--gold-b);border-radius:10px;padding:.7rem .9rem;font-size:.84rem;color:#8a6a1e}
 .btn-light{background:#fff;color:var(--ink)}
 .btn-light:hover{background:var(--paper-2);text-decoration:none}
+
+/* ---- optional webcam photo capture ---- */
+.photo-capture{grid-column:1 / -1;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1.2rem;margin-top:.2rem}
+.photo-capture .pc-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.photo-capture h4{margin:0;font-family:var(--serif);font-size:1.05rem}
+.photo-capture .pc-opt{font-size:.8rem;color:var(--ink-soft);font-weight:400}
+.photo-capture p.pc-why{font-size:.86rem;color:var(--ink-soft);margin:.5rem 0 0}
+.pc-stage{margin-top:.9rem;display:none}
+.pc-stage.on{display:block}
+.pc-video,.pc-shot{width:100%;max-width:320px;aspect-ratio:4/3;object-fit:cover;background:var(--paper-2);border-radius:12px;border:1px solid var(--line)}
+.pc-shot{display:none}
+.pc-btns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
+.pc-mini{font-size:.9rem;padding:.55rem 1.1rem;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:600;cursor:pointer}
+.pc-mini:hover{border-color:var(--ink)}
+.pc-mini.primary{background:var(--teal-b);color:#fff;border-color:var(--teal-b)}
+.pc-mini.primary:hover{background:var(--teal)}
+.pc-status{font-size:.85rem;color:var(--ink-soft);margin:.6rem 0 0}
+.pc-status.err{color:var(--red)}

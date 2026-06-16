@@ -38,7 +38,8 @@ const MCCSC_FORM_CONFIG = {
     city:       "city",
     state:      "state",
     postcode:   "postcode",
-    notes:      "notes"
+    notes:      "notes",
+    photo:      "photo"
   }
 };
 
@@ -95,4 +96,100 @@ const MCCSC_FORM_CONFIG = {
         console.error(err);
       });
   });
+})();
+
+/* ============================================================
+   Optional, consent-gated webcam photo capture
+   - Camera only starts on explicit user click ("Enable camera")
+   - User can capture / retake / remove / turn off
+   - Never blocks form submission; photo is optional
+   - Stores a base64 JPEG in the hidden #photo input on capture
+   ============================================================ */
+(function () {
+  const root = document.querySelector("[data-photo-capture]");
+  if (!root || !("mediaDevices" in navigator)) {
+    // Camera unsupported -> hide the whole optional block gracefully
+    if (root && !("mediaDevices" in navigator)) root.style.display = "none";
+    return;
+  }
+  const enableBtn = root.querySelector("[data-pc-enable]");
+  const stage     = root.querySelector("[data-pc-stage]");
+  const video     = root.querySelector("[data-pc-video]");
+  const shot      = root.querySelector("[data-pc-shot]");
+  const captureBtn= root.querySelector("[data-pc-capture]");
+  const retakeBtn = root.querySelector("[data-pc-retake]");
+  const removeBtn = root.querySelector("[data-pc-remove]");
+  const cancelBtn = root.querySelector("[data-pc-cancel]");
+  const statusEl  = root.querySelector("[data-pc-status]");
+  const dataInput = root.querySelector("[data-pc-data]");
+  let stream = null;
+
+  function setStatus(t, err) { statusEl.textContent = t || ""; statusEl.classList.toggle("err", !!err); }
+
+  function stopStream() {
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+  }
+
+  async function enableCamera() {
+    setStatus("Requesting camera…");
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+      video.srcObject = stream;
+      stage.classList.add("on");
+      video.style.display = ""; shot.style.display = "none";
+      captureBtn.style.display = ""; retakeBtn.style.display = "none"; removeBtn.style.display = "none";
+      enableBtn.style.display = "none";
+      setStatus("Camera on. Position yourself and tap Capture photo.");
+    } catch (err) {
+      setStatus("Couldn't access the camera. You can continue without a photo.", true);
+      console.warn(err);
+    }
+  }
+
+  function capture() {
+    if (!stream) return;
+    const w = video.videoWidth || 640, h = video.videoHeight || 480;
+    const canvas = document.createElement("canvas");
+    canvas.width = w; canvas.height = h;
+    canvas.getContext("2d").drawImage(video, 0, 0, w, h);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+    dataInput.value = dataUrl;
+    shot.src = dataUrl;
+    video.style.display = "none"; shot.style.display = "";
+    captureBtn.style.display = "none"; retakeBtn.style.display = ""; removeBtn.style.display = "";
+    setStatus("Photo captured. It will be sent when you submit. You can retake or remove it.");
+  }
+
+  function retake() {
+    dataInput.value = "";
+    video.style.display = ""; shot.style.display = "none";
+    captureBtn.style.display = ""; retakeBtn.style.display = "none"; removeBtn.style.display = "none";
+    setStatus("Camera on. Tap Capture photo.");
+  }
+
+  function removePhoto() {
+    dataInput.value = "";
+    shot.src = "";
+    cancelCamera();
+    setStatus("Photo removed.");
+  }
+
+  function cancelCamera() {
+    stopStream();
+    stage.classList.remove("on");
+    enableBtn.style.display = "";
+    setStatus("");
+  }
+
+  enableBtn.addEventListener("click", enableCamera);
+  captureBtn.addEventListener("click", capture);
+  retakeBtn.addEventListener("click", retake);
+  removeBtn.addEventListener("click", removePhoto);
+  cancelBtn.addEventListener("click", function () {
+    cancelCamera();
+    if (dataInput.value) setStatus("Camera off. Your captured photo is kept and will be sent on submit.");
+  });
+
+  // Clean up the camera if the user leaves the page
+  window.addEventListener("pagehide", stopStream);
 })();
