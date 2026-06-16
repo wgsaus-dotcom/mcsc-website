@@ -242,3 +242,11 @@ section{padding:clamp(3.5rem,7vw,6rem) 0}
 .acknowledgement .bar{flex:none;width:6px;align-self:stretch;border-radius:6px;background:linear-gradient(var(--red),var(--gold-b),var(--green))}
 .acknowledgement h4{color:#fff;font-family:var(--serif);font-size:1.05rem;letter-spacing:0;text-transform:none;margin:0 0 .5rem}
 .acknowledgement p{margin:0;font-size:.95rem;line-height:1.6}
+
+/* wide banner tile (JP/Notary) to fill the last row cleanly */
+.tile.jp-wide{grid-column:1 / -1;min-height:auto;flex-direction:row;align-items:center;justify-content:flex-start;gap:1.6rem;padding:1.7rem 2rem}
+.tile.jp-wide .ic{margin-bottom:0}
+.tile.jp-wide>div.txt{display:flex;flex-direction:column}
+.tile.jp-wide h3{margin:0 0 .3rem}
+@media(max-width:880px){.tile.jp-wide{grid-column:1 / -1;flex-direction:column;align-items:flex-start}}
+@media(max-width:560px){.tile.jp-wide{grid-column:auto}}
