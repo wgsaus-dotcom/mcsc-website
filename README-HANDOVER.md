@@ -16,8 +16,8 @@ services.html       Our services (incl. confidential family support)
 get-involved.html   Volunteer / donate / partner + form
 contact.html        Contact + form
 assets/
-  style.css         All styling (brand colours live at the top)
-  main.js           Mobile menu + Quick Exit button
+  style2.css         All styling (brand colours live at the top)
+  main2.js           Mobile menu + Quick Exit button
   logo.png          Trimmed logo
   logo.jpeg         Original logo
 ```
@@ -77,7 +77,7 @@ That's it — submissions arrive in your email.
 
 - **Text/links:** open any `.html` file in a text editor and edit the words. The
   page structure is labelled with comments like `<!-- HERO -->`.
-- **Brand colours:** open `assets/style.css`. The first block (`:root`) defines every
+- **Brand colours:** open `assets/style2.css`. The first block (`:root`) defines every
   colour once (red, orange, gold, green, teal, plum, navy). Change a hex value there
   and it updates everywhere.
 - **Logo:** replace `assets/logo.png` with the final logo (keep the same filename).

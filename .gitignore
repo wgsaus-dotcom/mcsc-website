@@ -1,0 +1,14 @@
+# build / deploy staging
+_deploy/
+.wrangler/
+node_modules/
+
+# local QA artifacts
+*.png
+!assets/*.png
+hero_check.png
+print_preview.png
+
+# os / editor
+.DS_Store
+*.log
