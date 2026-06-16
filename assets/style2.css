@@ -308,3 +308,33 @@ section{padding:clamp(3.5rem,7vw,6rem) 0}
   h2, h3{ page-break-after:avoid; }
   .todo{ background:#fff!important; border:1px dashed #999; color:#555!important; }
 }
+
+/* ============================================================
+   REGISTRATION / CAPTURE FORM + CTA
+   ============================================================ */
+.reg-cta{background:linear-gradient(135deg,var(--coral),var(--plum));color:#fff;text-align:center;position:relative;overflow:hidden}
+.reg-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 0%,rgba(255,255,255,.18),transparent 60%)}
+.reg-cta .wrap{position:relative;z-index:1}
+.reg-cta h2{color:#fff;margin-bottom:.6rem}
+.reg-cta .lead{color:rgba(255,255,255,.94);margin:0 auto 1.6rem}
+.reg-form-wrap{max-width:840px;margin:0 auto}
+.reg-form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:2.2rem;box-shadow:var(--shadow);text-align:left}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media(max-width:640px){.reg-grid{grid-template-columns:1fr}}
+.reg-form .field-full{grid-column:1 / -1}
+.reg-form label{display:block;font-size:.88rem;font-weight:600;margin-bottom:.35rem;color:var(--ink)}
+.reg-form label .req{color:var(--coral)}
+.reg-form input,.reg-form select,.reg-form textarea{width:100%;padding:.75rem .85rem;border:1.5px solid var(--line);border-radius:11px;font-family:inherit;font-size:.96rem;background:#fff;color:var(--ink)}
+.reg-form input:focus,.reg-form select:focus,.reg-form textarea:focus{outline:2px solid var(--teal-b);outline-offset:1px;border-color:var(--teal-b)}
+.reg-form .hint{font-size:.82rem;color:var(--ink-soft);margin:.3rem 0 0}
+.reg-actions{margin-top:1.4rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.reg-msg{font-size:.92rem;margin:0;color:var(--teal)}
+.reg-msg.error{color:var(--red)}
+.consent{display:flex;gap:.6rem;align-items:flex-start;margin-top:1.1rem;font-size:.88rem;color:var(--ink-soft)}
+.consent input{width:auto;margin-top:.2rem;flex:none}
+.section-divider{grid-column:1 / -1;border:0;border-top:1px solid var(--line);margin:.6rem 0 .2rem}
+.section-divider+*{margin-top:0}
+.form-section-label{grid-column:1 / -1;font-family:var(--serif);font-size:1.05rem;color:var(--ink);margin:.4rem 0 0}
+.it-note{grid-column:1 / -1;background:rgba(224,169,63,.12);border:1px dashed var(--gold-b);border-radius:10px;padding:.7rem .9rem;font-size:.84rem;color:#8a6a1e}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-light:hover{background:var(--paper-2);text-decoration:none}
