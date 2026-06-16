@@ -250,3 +250,61 @@ section{padding:clamp(3.5rem,7vw,6rem) 0}
 .tile.jp-wide h3{margin:0 0 .3rem}
 @media(max-width:880px){.tile.jp-wide{grid-column:1 / -1;flex-direction:column;align-items:flex-start}}
 @media(max-width:560px){.tile.jp-wide{grid-column:auto}}
+
+/* ============================================================
+   PRINT / SAVE-AS-PDF STYLES (A4, ink-friendly)
+   ============================================================ */
+@media print{
+  @page{ size:A4; margin:16mm 14mm; }
+  *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; box-shadow:none!important; text-shadow:none!important; animation:none!important; transition:none!important; }
+  .reveal{ opacity:1!important; transform:none!important; }
+  body{ background:#fff!important; color:#16130f!important; font-size:11pt; line-height:1.45; }
+  /* hide screen-only chrome */
+  .site-header, .nav-toggle, .quick-exit, .strip, .hero .mesh, .hero .grain,
+  .page-hero .mesh, .page-hero .grain, .cta-band, .hero-cta, form .btn, .btn{ display:none!important; }
+  /* neutralise dark sections so they print on white with dark text */
+  .hero, .page-hero, .flagship, .acknowledgement, .bg-ink, .bg-deep,
+  section[style*="var(--deep"], section[style*="var(--paper-2)"]{
+    background:#fff!important; color:#16130f!important; padding:10pt 0!important;
+  }
+  .hero h1, .hero h1 .accent, .hero .lead, .page-hero h1, .page-hero .lead,
+  .flagship h2, .flagship .lead, .flagship .eyebrow, .acknowledgement h4, .acknowledgement p,
+  .step-card h3, .step-card p, .checklist li, .glass .eyebrow,
+  h1, h2, h3, p, li, .lead, .eyebrow, .motto, .stat .l{
+    color:#16130f!important; -webkit-text-fill-color:#16130f!important;
+  }
+  .eyebrow, .motto{ color:#9e2b25!important; -webkit-text-fill-color:#9e2b25!important; }
+  .hero h1 .accent{ color:#d4622a!important; -webkit-text-fill-color:#d4622a!important; }
+  /* program tiles -> bordered white cards, keep a colour accent bar */
+  .tile, .tile.jp-wide{ background:#fff!important; color:#16130f!important; border:1px solid #ccc!important; border-left:4px solid #9e2b25!important; min-height:auto!important; padding:10pt!important; page-break-inside:avoid; }
+  .tile h3, .tile p, .tile .badge{ color:#16130f!important; }
+  .tile .ic, .tile::before, .tile::after, .icard .ic{ display:none!important; }
+  .tile .badge{ background:#eee!important; border:1px solid #ccc; }
+  /* glass / panels / cards -> plain bordered */
+  .glass, .panel, .icard, .purpose-card, .vm-card, .safe-note, .step-card{
+    background:#fff!important; color:#16130f!important; border:1px solid #ccc!important; padding:10pt!important; page-break-inside:avoid;
+  }
+  .icard::before{ display:none!important; }
+  .purpose-card::after, .cta-band::before, .tile::after, .tile::before{ display:none!important; }
+  .checklist li::before{ background:#9e2b25!important; }
+  /* hero photo: keep but constrain */
+  .hero-photo{ box-shadow:none!important; border:1px solid #ccc!important; max-width:70mm; }
+  .hero-photo::after, .hero-photo::before, .hero-photo figcaption{ display:none!important; }
+  /* layout: collapse multi-col grids to stack so nothing clips on A4 */
+  .hero .wrap, .split, .svc-feature, .tiles, .grid2, .steps, .team, .foot-grid, .stats{
+    display:block!important;
+  }
+  .tiles > *, .grid2 > *, .steps > *{ margin-bottom:8pt; }
+  /* stats numbers print dark */
+  .stat .n{ color:#9e2b25!important; -webkit-text-fill-color:#9e2b25!important; font-size:20pt; }
+  /* footer -> simple */
+  .site-footer{ background:#fff!important; color:#16130f!important; border-top:1px solid #ccc; padding:10pt 0!important; }
+  .site-footer h4, .site-footer a, .foot-bottom span, .foot-brand b{ color:#16130f!important; }
+  .foot-brand img, .brand img{ background:#fff!important; }
+  a{ color:#16130f!important; text-decoration:none; }
+  /* show full URL after important links so a printed copy is useful */
+  .site-footer a[href^="mailto"]::after{ content:" (" attr(href) ")"; }
+  section{ page-break-inside:auto; }
+  h2, h3{ page-break-after:avoid; }
+  .todo{ background:#fff!important; border:1px dashed #999; color:#555!important; }
+}
